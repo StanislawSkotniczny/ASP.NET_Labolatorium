@@ -61,13 +61,17 @@ namespace Labolatorium_3.Controllers
                 _contacts.Remove(model.Id);
                 return RedirectToAction("Index");
             }
-            [HttpGet]
-            public IActionResult Details()
+        [HttpGet]
+        public IActionResult Details(int id)
+        {
+            if (_contacts.ContainsKey(id))
             {
-
-                return View();
-                return RedirectToAction("Index");
+                var book = _contacts[id];
+                return View(book);
             }
+            return NotFound(); // Jeśli książka o podanym ID nie istnieje
         }
-    
+
+    }
+
 }

@@ -69,14 +69,17 @@ namespace Labolatorium_3_projekt_Book.Controllers
             return RedirectToAction("Index");
         }
 
+    
         [HttpGet]
-        public IActionResult Details()
+        public IActionResult Details(int id)
         {
-
-            return View();
-            return RedirectToAction("Index");
+            if (_books.ContainsKey(id))
+            {
+                var book = _books[id];
+                return View(book);
+            }
+            return NotFound(); // Jeśli książka o podanym ID nie istnieje
         }
-
 
 
 
