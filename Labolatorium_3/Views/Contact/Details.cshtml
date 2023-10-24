@@ -1,0 +1,16 @@
+﻿@model Contact
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+<h1>Szczegóły kontaktu</h1>
+<label asp-for="Name">Imię</label>
+<p>@Model.Name</p>
+<label asp-for="Email">E-mail</label>
+<p>@Model.Email</p>
+<label asp-for="Phone">Telefon</label>
+<p>
+    @Model.Phone</h>
+    <label asp-for="Birth">Data Urodzenia</label>
+<p>@Model.Birth</h>
