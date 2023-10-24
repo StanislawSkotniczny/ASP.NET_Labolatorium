@@ -1,0 +1,20 @@
+﻿@model Book
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+<h1>Szczegóły</h1>
+<label asp-for="Title">Tytuł</label>
+<p>@Model.Title</p>
+<label asp-for="Author">Autor</label>
+<p>@Model.Author</p>
+<label asp-for="PageNumber">Liczba stron</label>
+<p>@Model.PageNumber</p>
+<label asp-for="ISBN">ISBN</label>
+<p>@Model.ISBN</p>
+<label asp-for="PublicationYear">Rok wydania</label>
+<p>@Model.PublicationYear</p>
+<label asp-for="Publisher">Wydawca</label>
+<p>@Model.Publisher</p>
+<a class="btn btn-info" asp-action="Index" type="submit">Powrót</a>

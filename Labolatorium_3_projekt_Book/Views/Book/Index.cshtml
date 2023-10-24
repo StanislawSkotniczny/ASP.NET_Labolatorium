@@ -1,0 +1,43 @@
+﻿@model Dictionary<int, Book>
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+<h1>Lista książek</h1>
+<a class="btn btn-primary" asp-controller="Book" asp-action="Create">Dodaj książkę</a>
+<table class="table">
+    <thead></thead>
+    <tr>
+        <th>
+            Tytuł
+        </th>
+        <th>
+            Autor
+        </th>
+        <th>
+            Opcje
+        </th>
+    </tr>
+    <tbody>
+        @foreach(var item in @Model)
+        {
+            <tr>
+                <td>
+                    @item.Value.Title
+                </td>
+                <td>
+                    @item.Value.Author
+                </td>
+                <td>
+                    <a class="btn btn-outline-primary" asp-controller="Book" asp-action="Update" asp-route-id="@item.Key">Edycja</a>
+                    <a class="btn btn-outline-info" asp-controller="Book" asp-action="Details" asp-route-id="@item.Key">Szczegóły</a>
+                    <a class="btn btn-outline-danger" asp-controller="Book" asp-action="Delete" asp-route-id="@item.Key">Usuń</a>
+                </td>
+                <td>
+
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

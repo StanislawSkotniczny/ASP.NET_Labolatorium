@@ -1,0 +1,42 @@
+﻿@model Book
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+<h1>Dodaj książkę</h1>
+<form asp-controller="Book" asp-action="Create" method="post">
+    <div class="mb-3">
+        <label asp-for="Title">Tytuł</label>
+        <input class="form-control" asp-for="Title" />
+        <span class="text-danger" asp-validation-for="Title"></span>
+    </div>
+    <div class="mb-3">
+        <label asp-for="Author">Autor</label>
+        <input class="form-control" asp-for="Author" />
+        <span class="text-danger" asp-validation-for="Author"></span>
+    </div>
+    <div class="mb-3">
+        <label asp-for="PageNumber">Liczba Stron</label>
+        <input class="form-control" asp-for="PageNumber" />
+        <span class="text-danger" asp-validation-for="PageNumber"></span>
+    </div>
+    <div class="mb-3">
+        <label asp-for="ISBN">ISBN</label>
+        <input class="form-control" asp-for="ISBN" />
+        <span class="text-danger" asp-validation-for="ISBN"></span>
+    </div>
+    <div class="mb-3">
+        <label asp-for="PublicationYear">Rok wydania</label>
+        <input class="form-control" asp-for="PublicationYear" />
+        <span class="text-danger" asp-validation-for="PublicationYear"></span>
+    </div>
+    <div class="mb-3">
+        <label asp-for="Publisher">Wydawnictwo</label>
+        <input class="form-control" asp-for="Publisher" />
+        <span class="text-danger" asp-validation-for="Publisher"></span>
+    </div>
+    <div class="mb-3">
+        <button class="btn btn-primary" type="submit">Utwórz</button>
+    </div>
+</form>
