@@ -27,7 +27,7 @@ namespace Labolatorium_3_projekt_Book.Controllers
         {
             if (ModelState.IsValid)
             {
-                // zapisanie modelu do bazy lub kolekcji
+                // zapisanie modelu do bazy lub kolekcji.
                 model.Id = id++;
                 _books[model.Id] = model;
                 return RedirectToAction("Index");
