@@ -1,19 +1,40 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Reflection;
-using Labolatorium_3.Models;
+using Laboratorium_3.Models;
 
-namespace Labolatorium_3.Controllers
+
+namespace Laboratorium_3.Controllers
 {
     
     
         public class ContactController : Controller
         {
-            static Dictionary<int, Contact> _contacts = new Dictionary<int, Contact>();
-            static int id = 0;
+            //static Dictionary<int, Contact> _contacts = new Dictionary<int, Contact>();
+            //static int id = 0;
+
+            
+
+
+            private readonly IContactService _contactService;
+
+            private readonly IDateTimeProvider _dateTimeProvider;
+
+            public ContactController(IDateTimeProvider timeProvider, IContactService contactService)
+            {
+               _dateTimeProvider = timeProvider;
+            _contactService = contactService;
+        }
+
+            //public ContactController (IContactService contactService) 
+            //{
+            //     _contactService = contactService;
+            //}
+
+
             public IActionResult Index()
             {
 
-                return View(_contacts);
+                return View(_contactService.FindAll());
             }
 
             [HttpGet]
@@ -27,9 +48,7 @@ namespace Labolatorium_3.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    // zapisanie modelu do bazy lub kolekcji
-                    model.Id = id++;
-                    _contacts[model.Id] = model;
+                    _contactService.Add(model);
                     return RedirectToAction("Index");
                 }
                 return View();
@@ -37,7 +56,7 @@ namespace Labolatorium_3.Controllers
             [HttpGet]
             public IActionResult Update(int id)
             {
-                return View(_contacts[id]);
+                return View(_contactService.FindById(id));
             }
             [HttpPost]
             public IActionResult Update(Contact model)
@@ -45,7 +64,7 @@ namespace Labolatorium_3.Controllers
                 if (ModelState.IsValid)
                 {
                     // zapisanie modelu do bazy lub kolekcji
-                    _contacts[model.Id] = model;
+                    _contactService.Update(model);
                     return RedirectToAction("Index");
                 }
                 return View();
@@ -53,24 +72,24 @@ namespace Labolatorium_3.Controllers
             [HttpGet]
             public IActionResult Delete(int id)
             {
-                return View(_contacts[id]);
+                return View(_contactService.FindById(id));
             }
             [HttpPost]
             public IActionResult Delete(Contact model)
             {
-                _contacts.Remove(model.Id);
+            _contactService.DeleteById(model.Id);
                 return RedirectToAction("Index");
             }
-        [HttpGet]
-        public IActionResult Details(int id)
-        {
-            if (_contacts.ContainsKey(id))
-            {
-                var book = _contacts[id];
-                return View(book);
-            }
-            return NotFound(); // Jeśli książka o podanym ID nie istnieje
-        }
+        //[HttpGet]
+        //public IActionResult Details(int id)
+        //{
+        //    if (_contacts.ContainsKey(id))
+        //    {
+        //        var book = _contacts[id];
+        //        return View(book);
+        //    }
+        //    return NotFound(); // Jeśli książka o podanym ID nie istnieje
+        //}
 
     }
 

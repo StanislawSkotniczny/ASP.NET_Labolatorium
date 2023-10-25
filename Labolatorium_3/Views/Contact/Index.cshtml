@@ -1,4 +1,4 @@
-﻿@model Dictionary<int, Contact>
+﻿@model List<Contact>
 @*
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
@@ -8,33 +8,43 @@
 }
 <h1>Lista kontaktów</h1>
 <a class="btn btn-primary" asp-controller="Contact" asp-action="Create">Utwórz kontakt</a>
+@if(Model.Count >0)
+{
 <table class="table">
     <thead></thead>
     <tr>
         <th>
-            Imię
+            @Html.DisplayNameFor(i => Model[0].Name)
         </th>
         <th>
-            Email
+            @Html.DisplayNameFor(i => Model[0].Email)
+        </th>
+        <th>
+            @Html.DisplayNameFor(i => Model[0].Priority)
         </th>
         <th>
             Akcje
         </th>
+       
     </tr>
     <tbody>
         @foreach (var item in @Model)
         {
             <tr>
                 <td>
-                    @item.Value.Name
+                    @item.Name
                 </td>
                 <td>
-                    @item.Value.Email
+                    @item.Email
                 </td>
                 <td>
-                    <a class="btn btn-outline-primary" asp-controller="Contact" asp-action="Update" asp-route-id="@item.Key">Edycja</a>
-                    <a class="btn btn-outline-info" asp-controller="Contact" asp-action="Details" asp-route-id="@item.Key">Szczegóły</a>
-                    <a class="btn btn-outline-danger" asp-controller="Contact" asp-action="Delete" asp-route-id="@item.Key">Usuń</a>
+                    @*@Html.DisplayNameFor(x => item.Value.Priority)*@
+                    @item.Priority.GetDisplayName()
+                </td>
+                <td>
+                    <a class="btn btn-outline-primary" asp-controller="Contact" asp-action="Update" asp-route-id="@item.Id">Edycja</a>
+                    <a class="btn btn-outline-info" asp-controller="Contact" asp-action="Details" asp-route-id="@item.Id">Szczegóły</a>
+                    <a class="btn btn-outline-danger" asp-controller="Contact" asp-action="Delete" asp-route-id="@item.Id">Usuń</a>
                 </td>
                 <td>
                 </td>
@@ -42,3 +52,4 @@
         }
     </tbody>
 </table>
+}
