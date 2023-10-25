@@ -22,8 +22,8 @@ namespace Laboratorium_3.Controllers
             public ContactController(IDateTimeProvider timeProvider, IContactService contactService)
             {
                _dateTimeProvider = timeProvider;
-            _contactService = contactService;
-        }
+               _contactService = contactService;
+            }
 
             //public ContactController (IContactService contactService) 
             //{

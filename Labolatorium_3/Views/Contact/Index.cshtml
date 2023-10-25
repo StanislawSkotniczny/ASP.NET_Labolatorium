@@ -23,6 +23,9 @@
             @Html.DisplayNameFor(i => Model[0].Priority)
         </th>
         <th>
+          created @* @Html.DisplayName(i => Model[0].Created)*@
+        </th>
+        <th>
             Akcje
         </th>
        
@@ -41,6 +44,11 @@
                     @*@Html.DisplayNameFor(x => item.Value.Priority)*@
                     @item.Priority.GetDisplayName()
                 </td>
+                <td>
+                        @item.Created
+                </td>
+                
+               
                 <td>
                     <a class="btn btn-outline-primary" asp-controller="Contact" asp-action="Update" asp-route-id="@item.Id">Edycja</a>
                     <a class="btn btn-outline-info" asp-controller="Contact" asp-action="Details" asp-route-id="@item.Id">Szczegóły</a>
