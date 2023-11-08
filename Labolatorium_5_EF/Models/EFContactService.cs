@@ -15,7 +15,7 @@ namespace Labolatorium_5_EF.Models
         {
             _context.Contacts.Add(ContactMapper.ToEntity(model));
             _context.SaveChanges();
-            return e.Entity.ContactId;
+            //return .Entity.ContactId;
         }
 
         public void DeleteById(int id)
