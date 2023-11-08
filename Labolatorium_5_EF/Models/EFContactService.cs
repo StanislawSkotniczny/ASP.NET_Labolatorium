@@ -15,26 +15,40 @@ namespace Labolatorium_5_EF.Models
         {
             _context.Contacts.Add(ContactMapper.ToEntity(model));
             _context.SaveChanges();
+            return e.Entity.ContactId;
         }
 
         public void DeleteById(int id)
         {
-            throw new NotImplementedException();
+            var find = _context.Contacts.Find(id);
+            if(find is not null)
+            {
+                _context.Contacts.Remove(find);
+                _context.SaveChanges();
+            }
+            
+
         }
 
         public List<Contact> FindAll()
         {
-            throw new NotImplementedException();
+            return _context
+                .Contacts.
+                Select(e => ContactMapper.FromEntity(e))
+                .ToList();
         }
 
         public Contact FindById(int id)
         {
-            throw new NotImplementedException();
+            var find = _context.Contacts.Find(id);
+            return  find is null ? null : ContactMapper.FromEntity(find);
+
         }
 
-        public void Update(Contact contact)
+        public void Update(Contact model)
         {
-            throw new NotImplementedException();
+            var entity = ContactMapper.ToEntity(model);
+            _context.Contacts.Update(entity);
         }
     }
 }
