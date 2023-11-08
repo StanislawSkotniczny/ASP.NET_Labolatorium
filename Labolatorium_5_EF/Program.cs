@@ -1,10 +1,12 @@
 using Data;
+using Labolatorium_5_EF.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<AppDbContext>();
+builder.Services.AddTransient<IContactService , EFContactService>(); //wazne!!!
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
