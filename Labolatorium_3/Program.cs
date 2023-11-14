@@ -1,5 +1,6 @@
 using Labolatorium_3.Models;
 using Laboratorium_3.Models;
+using System.Xml.Linq;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -8,6 +9,9 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddSingleton<IContactService, MemoryContactService>();
 builder.Services.AddSingleton<IDateTimeProvider, CurrentDateTimeProvider>();
 builder.Services.AddSingleton<IBookService, MemoryBookService>();
+builder.Services.AddDbContext<Data.AppDbContext>();
+builder.Services.AddTransient<IBookService, EFBookService>();
+
 
 var app = builder.Build();
 
