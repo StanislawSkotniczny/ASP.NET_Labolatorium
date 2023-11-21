@@ -13,17 +13,18 @@ namespace Data.Entities
 
     public class ContactEntity
     {
-        
-        public int Id { get; set; }
+
+        [Key]
+        public int ContactId { get; set; }
         [Column("name")]
         [Required]
-        [MaxLength(80)]
+        [MaxLength(50)]
         public string Name { get; set; }
         [Required]
         public string Email { get; set; }
-        
         public string? Phone { get; set; }
-
-        public DateTime Birth { get; set; }
+        public DateTime? Birth { get; set; }
+        public OrganizationEntity? Organization { get; set; }
+        public int? OrganizationId { get; set; }
     }
 }

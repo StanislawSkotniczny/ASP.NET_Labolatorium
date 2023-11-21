@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Reflection;
 using Laboratorium_3.Models;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 
 namespace Laboratorium_3.Controllers
@@ -9,38 +10,25 @@ namespace Laboratorium_3.Controllers
     
         public class ContactController : Controller
         {
-            //static Dictionary<int, Contact> _contacts = new Dictionary<int, Contact>();
-            //static int id = 0;
+             private readonly IContactService _contactService;
 
-            
-
-
-            private readonly IContactService _contactService;
-
-            private readonly IDateTimeProvider _dateTimeProvider;
-
-            public ContactController(IDateTimeProvider timeProvider, IContactService contactService)
+            public ContactController(IContactService contactService)
             {
-               _dateTimeProvider = timeProvider;
-               _contactService = contactService;
+                _contactService = contactService;
             }
-
-            //public ContactController (IContactService contactService) 
-            //{
-            //     _contactService = contactService;
-            //}
-
 
             public IActionResult Index()
             {
-
                 return View(_contactService.FindAll());
             }
 
             [HttpGet]
             public IActionResult Create()
             {
-                return View();
+                List<SelectListItem> organizations = CreateOrganizationItemList();
+                Contact model = new Contact();
+                model.OrganizationList = organizations;
+                return View(model);
             }
 
             [HttpPost]
@@ -51,45 +39,61 @@ namespace Laboratorium_3.Controllers
                     _contactService.Add(model);
                     return RedirectToAction("Index");
                 }
+                model.OrganizationList = CreateOrganizationItemList();
                 return View();
             }
+
+            private List<SelectListItem> CreateOrganizationItemList()
+            {
+                var gr = new SelectListGroup() { Name = "Organizacje" };
+                return _contactService.FindAllOrganizations()
+                    .Select(e => new SelectListItem() { Text = e.Name, Value = e.Id.ToString(), Group = gr })
+                    .Append(new SelectListItem() { Text = "Brak organizacji", Value = "", Selected = true, Group = new SelectListGroup() { Name = "Brak" } })
+                    .ToList();
+            }
+
             [HttpGet]
             public IActionResult Update(int id)
             {
-                return View(_contactService.FindById(id));
+                var model = _contactService.FindById(id);
+                model.OrganizationList = CreateOrganizationItemList();
+                return View(model);
             }
+
             [HttpPost]
             public IActionResult Update(Contact model)
             {
                 if (ModelState.IsValid)
                 {
-                    // zapisanie modelu do bazy lub kolekcji
                     _contactService.Update(model);
                     return RedirectToAction("Index");
                 }
                 return View();
             }
+
             [HttpGet]
             public IActionResult Delete(int id)
             {
                 return View(_contactService.FindById(id));
             }
+
             [HttpPost]
             public IActionResult Delete(Contact model)
             {
-            _contactService.DeleteById(model.Id);
+                _contactService.DeleteById(model.Id);
                 return RedirectToAction("Index");
             }
-        //[HttpGet]
-        //public IActionResult Details(int id)
-        //{
-        //    if (_contacts.ContainsKey(id))
-        //    {
-        //        var book = _contacts[id];
-        //        return View(book);
-        //    }
-        //    return NotFound(); // Jeśli książka o podanym ID nie istnieje
-        //}
+
+            [HttpGet]
+            public IActionResult Details(int id)
+            {
+                return View(_contactService.FindById(id));
+            }
+            [HttpPost]
+            public IActionResult Details(Contact model)
+            {
+                return RedirectToAction("Index");
+            }
 
     }
 

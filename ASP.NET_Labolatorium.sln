@@ -9,9 +9,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Labolatorium_2", "Labolator
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Labolatorium_3", "Labolatorium_3\Labolatorium_3.csproj", "{90968DE4-5A02-4F38-9E94-4C52767C5E61}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Labolatorium_5_EF", "Labolatorium_5_EF\Labolatorium_5_EF.csproj", "{ABA69458-7D50-479D-80F8-93DE65901A11}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Labolatorium_5_EF", "Labolatorium_5_EF\Labolatorium_5_EF.csproj", "{ABA69458-7D50-479D-80F8-93DE65901A11}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Data", "Data\Data.csproj", "{4F6FD938-87DD-4588-A777-0FAD361866D3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Data", "Data\Data.csproj", "{4F6FD938-87DD-4588-A777-0FAD361866D3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

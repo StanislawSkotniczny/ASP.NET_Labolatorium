@@ -1,4 +1,5 @@
-﻿using Laboratorium_3.Models;
+﻿using Data.Entities;
+using Laboratorium_3.Models;
 using System.Xml.Serialization;
 
 namespace Laboratorium_3.Models
@@ -7,7 +8,7 @@ namespace Laboratorium_3.Models
     {
         int Add(Contact contact);
          
-        Contact FindById(int id);
+        Contact? FindById(int id);
 
         List <Contact> FindAll();
 
@@ -15,6 +16,6 @@ namespace Laboratorium_3.Models
 
         void Update(Contact contact);
 
-
+        List<OrganizationEntity> FindAllOrganizations();
     }
 }

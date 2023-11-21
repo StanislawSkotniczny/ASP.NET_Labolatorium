@@ -4,13 +4,12 @@
 *@
 @{
 }
-<h1>Szczegóły kontaktu</h1>
-<label asp-for="Name">Imię</label>
-<p>@Model.Name</p>
-<label asp-for="Email">E-mail</label>
-<p>@Model.Email</p>
-<label asp-for="Phone">Telefon</label>
-<p>
-    @Model.Phone</h>
-    <label asp-for="Birth">Data Urodzenia</label>
-<p>@Model.Birth</h>
+<h1>
+    Szczegóły
+</h1>
+<h3>imie - @Model.Name</h3>
+<h3>e-mail - @Model.Email</h3>
+<h3>numer telefonu - @Model.Phone</h3>
+<h3>data urodzenia - @Model.Birth</h3>
+<h3>data tworzenia - @Model.Created</h3>
+<a class="btn btn-primary" asp-action="Index">Powrót</a>

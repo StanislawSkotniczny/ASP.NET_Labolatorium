@@ -2,7 +2,7 @@
 {
     public class CurrentDateTimeProvider:IDateTimeProvider
     {
-        public DateTime GetDateTime()
+        public DateTime Now()
         {
             return DateTime.Now;
         }

@@ -5,6 +5,7 @@
 @{
 }
 <h1>Dodaj kontakt</h1>
+
 <form asp-controller="Contact" asp-action="Create" method="post">
     <div class="mb-3">
         <label asp-for="Name"></label>
@@ -24,14 +25,18 @@
     <div class="mb-3">
         <label asp-for="Birth"></label>
         <input class="form-control" asp-for="Birth" />
-        <span class="text-danger" asp-validation-for="Birth"></span>
+        <span asp-validation-for="Birth"></span>
+    </div>
+    <div class="mb-3">
+        <select class="form-control" asp-for="OrganizationId" asp-items="@Model.OrganizationList"></select>
+        <a class="btn btn-primary" asp-controller="Organization" asp-action="Create">Utworz organizacje</a>
     </div>
     <div class="mb-3">
         <label asp-for="Priority"></label>
         <select class="form-control" asp-for="Priority" asp-items="@Html.GetEnumSelectList<Priority>()"></select>
-        <span class="text-danger" asp-validation-for="Priority"></span>
+        <span asp-validation-for="Priority"></span>
     </div>
     <div class="mb-3">
-        <button class="btn btn-primary" type="submit">Utwórz</button>
+        <button class="btn btn-primary" type="submit">Utworz</button>
     </div>
 </form>
