@@ -1,4 +1,6 @@
 ﻿using Data.Entities;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Internal;
 using System;
@@ -9,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace Data
 {
-    public class AppDbContext: DbContext
+    public class AppDbContext: IdentityDbContext<IdentityUser>
     {
         public DbSet<ContactEntity> Contacts { get; set; }
         public DbSet<OrganizationEntity> Organizations { get; set; }
@@ -31,6 +33,47 @@ namespace Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            base.OnModelCreating(modelBuilder);//last lab
+            var user = new IdentityUser()
+            { 
+                Id = Guid.NewGuid().ToString(),
+                UserName = "bartek",
+                NormalizedUserName = "BARTEK",
+                Email = "bartek@wsei.pl",
+                NormalizedEmail = "BARTEK@WSEI.PL",
+                EmailConfirmed = true,
+            };
+            PasswordHasher<IdentityUser> passwordHasher = new PasswordHasher<IdentityUser>();
+            user.PasswordHash = passwordHasher.HashPassword(user, "Bartek123!");
+
+            modelBuilder.Entity<IdentityUser>()
+                .HasData(user);
+
+            var adminRole = new IdentityRole()
+            {
+                Id = Guid.NewGuid().ToString(),
+                Name = "admin",
+                NormalizedName = "ADMIN",
+            };
+
+            adminRole.ConcurrencyStamp = adminRole.Id;
+            //skojarzenie uzytkownika z rola admina
+            modelBuilder.Entity<IdentityUserRole<string>>()
+                .HasData(
+                 new IdentityUserRole<string>()
+                 {
+                     RoleId = adminRole.Id,
+                     UserId = user.Id,
+                 }
+                );
+            modelBuilder.Entity<IdentityRole>()
+                .HasData(adminRole);
+
+
+
+
+            /////////////////////////////////////////////////////////
+
             modelBuilder.Entity<ContactEntity>()
                 .HasOne(c => c.Organization)
                 .WithMany(o => o.Contacts)

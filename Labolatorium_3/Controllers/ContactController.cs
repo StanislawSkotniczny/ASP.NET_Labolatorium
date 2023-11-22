@@ -2,12 +2,12 @@
 using System.Reflection;
 using Laboratorium_3.Models;
 using Microsoft.AspNetCore.Mvc.Rendering;
-
+using Microsoft.AspNetCore.Authorization;
 
 namespace Laboratorium_3.Controllers
 {
-    
-    
+
+        [Authorize(Roles = "admin")]
         public class ContactController : Controller
         {
              private readonly IContactService _contactService;
@@ -17,6 +17,7 @@ namespace Laboratorium_3.Controllers
                 _contactService = contactService;
             }
 
+            [AllowAnonymous]
             public IActionResult Index()
             {
                 return View(_contactService.FindAll());
