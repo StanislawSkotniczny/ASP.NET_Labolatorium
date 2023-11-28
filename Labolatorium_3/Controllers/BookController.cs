@@ -3,6 +3,7 @@ using Labolatorium_3.Models;
 using System.Reflection;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Laboratorium_3.Models;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace Labolatorium_3.Controllers
 {
@@ -29,7 +30,10 @@ namespace Labolatorium_3.Controllers
         [HttpGet]
         public IActionResult Create()
         {
-            return View();
+            List<SelectListItem> rentals = CreateRentalItemList();
+            Book model = new Book();
+            model.RentalList = rentals;
+            return View(model);
         }
 
         [HttpPost]
@@ -41,14 +45,19 @@ namespace Labolatorium_3.Controllers
                 _bookService.Add(model);
                 return RedirectToAction("Index");
             }
+            model.RentalList = CreateRentalItemList();
             return View();
+
+           
         }
 
 
         [HttpGet]
         public IActionResult Update(int id)
         {
-            return View(_bookService.FindById(id));
+            var model = _bookService.FindById(id);
+            model.RentalList = CreateRentalItemList();
+            return View(model);
         }
 
 
@@ -78,7 +87,17 @@ namespace Labolatorium_3.Controllers
             return RedirectToAction("Index");
         }
 
-    
+
+
+        private List<SelectListItem> CreateRentalItemList()
+        {
+            var gr = new SelectListGroup() { Name = "Wypożyczono" };
+            return _bookService.FindAllRentalsForVieModel()
+                .Select(e => new SelectListItem() { Text = e.RentalName, Value = e.Id.ToString(), Group = gr })
+                .Append(new SelectListItem() { Text = "Brak organizacji", Value = "", Selected = true, Group = new SelectListGroup() { Name = "Brak" } })
+                .ToList();
+        }
+
         //[HttpGet]
         //public IActionResult Details(int id)
         //{

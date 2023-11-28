@@ -26,12 +26,11 @@ namespace Data.Entities
 
         [MaxLength(13)]
         public string ISBN { get; set; }
-
-        
         public string PublicationYear { get; set; }
-
-
-       
         public string Publisher { get; set; }
+
+        public RentalEntity? Rental { get; set; }
+        public int? RentalId { get; set; }
+        
     }
 }

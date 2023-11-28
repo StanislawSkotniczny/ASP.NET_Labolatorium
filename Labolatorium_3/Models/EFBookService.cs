@@ -34,6 +34,11 @@ namespace Labolatorium_3.Models
             return _context.Books.Select(e => BookMapper.FromEntity(e)).ToList();
         }
 
+        public List<RentalEntity> FindAllRentalsForVieModel()
+        {
+            return _context.Rentals.ToList();
+        }
+
         public Book? FindById(int id)
         {
             return BookMapper.FromEntity(_context.Books.Find(id));

@@ -1,4 +1,5 @@
-﻿using Laboratorium_3.Models;
+﻿using Data.Entities;
+using Laboratorium_3.Models;
 
 namespace Labolatorium_3.Models
 {
@@ -13,5 +14,8 @@ namespace Labolatorium_3.Models
         void DeleteById(int id);
 
         void Update(Book book);
+
+        List<RentalEntity> FindAllRentalsForVieModel();
+
     }
 }

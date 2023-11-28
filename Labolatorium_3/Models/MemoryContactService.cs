@@ -60,7 +60,7 @@ namespace Laboratorium_3.Models
          .Select(contact => new OrganizationEntity
          {
              Id = contact.Id, // Assuming there is a mapping between Contact Id and OrganizationEntity Id
-             Name = contact.Name, // Assuming there is a mapping between Contact Name and OrganizationEntity Name
+             Name = contact.Name // Assuming there is a mapping between Contact Name and OrganizationEntity Name
                                   // Map other properties accordingly
          })
          .ToList();

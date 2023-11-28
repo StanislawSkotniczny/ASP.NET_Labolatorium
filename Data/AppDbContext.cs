@@ -1,4 +1,5 @@
 ﻿using Data.Entities;
+using Data.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
@@ -15,6 +16,8 @@ namespace Data
     {
         public DbSet<ContactEntity> Contacts { get; set; }
         public DbSet<OrganizationEntity> Organizations { get; set; }
+
+        public DbSet<RentalEntity> Rentals { get; set; }
 
         public DbSet<BookEntity> Books { get; set; }
         private string Path { get; set; }
@@ -46,6 +49,24 @@ namespace Data
             PasswordHasher<IdentityUser> passwordHasher = new PasswordHasher<IdentityUser>();
             user.PasswordHash = passwordHasher.HashPassword(user, "Bartek123!");
 
+
+            modelBuilder.Entity<RentalEntity>()
+            .OwnsOne(e => e.RentingPerson);
+
+
+            modelBuilder.Entity<BookEntity>()
+            .HasOne(e => e.Rental)
+            .WithMany(o => o.Books)
+            .HasForeignKey(e => e.RentalId);
+            
+
+
+
+            modelBuilder.Entity<ContactEntity>()
+               .HasOne(c => c.Organization)
+               .WithMany(o => o.Contacts)
+               .HasForeignKey(c => c.OrganizationId);
+
             modelBuilder.Entity<IdentityUser>()
                 .HasData(user);
 
@@ -74,10 +95,7 @@ namespace Data
 
             /////////////////////////////////////////////////////////
 
-            modelBuilder.Entity<ContactEntity>()
-                .HasOne(c => c.Organization)
-                .WithMany(o => o.Contacts)
-                .HasForeignKey(c => c.OrganizationId);
+           
 
             modelBuilder.Entity<OrganizationEntity>().HasData
             (
@@ -99,6 +117,65 @@ namespace Data
                     new { OrganizationEntityId = 101, City = "Kraków", Street = "św. Filipa 17", PostalCode = "31-150" },
                     new { OrganizationEntityId = 102, City = "Kraków", Street = "Rozwoju 1/4", PostalCode = "36-160" }
                 );
+
+
+            /////////////////////////////////////dodaje dane do projektu/////////////////////////////////////////////////////////////////////////
+
+
+            modelBuilder.Entity<RentalEntity>().HasData
+           (
+               new RentalEntity() { Id = 1, RentalName = "Biblioteka Miejska", Description = "Wypożyczalnia publiczna" },
+               new RentalEntity() { Id = 2, RentalName = "Księgarnia XYZ", Description = "Sklep z książkami" }
+           ); ;
+
+
+           
+
+
+            // Przykładowe dane dla BookEntity
+            modelBuilder.Entity<BookEntity>().HasData(
+                new BookEntity()
+                {
+                    Id = 1,
+                    Title = "C# Programming",
+                    Author = "John Smith",
+                    PageNumber = "300",
+                    ISBN = "9780123456789",
+                    PublicationYear = "2022",
+                    Publisher = "Tech Books",
+                    RentalId = 1
+                },
+                new BookEntity()
+                {
+                    Id = 2,
+                    Title = "Introduction to ASP.NET Core",
+                    Author = "Emily Johnson",
+                    PageNumber = "250",
+                    ISBN = "9789876543210",
+                    PublicationYear = "2021",
+                    Publisher = "Coding Press",
+                    RentalId = 2
+                }
+            );
+
+
+            modelBuilder.Entity<RentalEntity>()
+                .OwnsOne(o => o.RentingPerson)
+                .HasData
+                (
+                    new {RentalEntityId =1 ,Name = "Anna", Surname = "Nowak" },
+                    new {RentalEntityId = 2, Name = "Jan", Surname = "Nowak" }
+                );
+
+
+
+
+
+            ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+
         }
 
 

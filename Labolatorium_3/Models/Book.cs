@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using System.ComponentModel.DataAnnotations;
 
 namespace Labolatorium_3.Models
@@ -24,6 +26,15 @@ namespace Labolatorium_3.Models
         public string PublicationYear { get; set; }
 
         public string Publisher { get; set;}
+
+
+        [HiddenInput]
+        public DateTime Created { get; set; }
+        public int?  RentalId { get; set; }
+        [ValidateNever]
+        public List<SelectListItem> RentalList { get; set; }
+
+
     }
 
 }
