@@ -1,4 +1,4 @@
-using Labolatorium_3.Models;
+using Laboratorium_3.Models;
 using Laboratorium_3.Models;
 using Microsoft.AspNetCore.Identity;
 using Data;

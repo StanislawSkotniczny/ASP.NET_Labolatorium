@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using Data;
 using Data.Entities;
 
-namespace Labolatorium_3.Controllers
+namespace Laboratorium_3.Controllers
 {
     public class RentalController : Controller
     {

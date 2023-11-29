@@ -1,7 +1,7 @@
 ﻿using Data.Entities;
-using Labolatorium_3.Models;
+using Laboratorium_3.Models;
 
-namespace Labolatorium_3.Mappers
+namespace Laboratorium_3.Mappers
 {
     public class BookMapper
     {

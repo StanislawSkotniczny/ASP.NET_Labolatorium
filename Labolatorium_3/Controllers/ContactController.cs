@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Authorization;
 namespace Laboratorium_3.Controllers
 {
 
-        [Authorize(Roles = "admin")]
+        //[Authorize(Roles = "admin")]
         public class ContactController : Controller
         {
              private readonly IContactService _contactService;
@@ -96,6 +96,28 @@ namespace Laboratorium_3.Controllers
                 return RedirectToAction("Index");
             }
 
-    }
+
+
+
+            [HttpGet]
+            public IActionResult CreateApi()
+            {
+            
+                return View();
+            }
+
+            [HttpPost]
+            public IActionResult CreateApi(Contact model)
+            {
+                if (ModelState.IsValid)
+                {
+                    _contactService.Add(model);
+                    return RedirectToAction("Index");
+                }
+
+                return View();
+            }
+
+        }
 
 }

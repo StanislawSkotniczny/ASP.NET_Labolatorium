@@ -4,7 +4,7 @@
 using Data.Entities;
 using Laboratorium_3.Models;
 
-namespace Labolatorium_3.Models
+namespace Laboratorium_3.Models
 {
     public class ContactMapper
     {

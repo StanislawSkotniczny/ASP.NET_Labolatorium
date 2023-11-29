@@ -1,8 +1,8 @@
 ﻿using Data;
 using Data.Entities;
-using Labolatorium_3.Mappers;
+using Laboratorium_3.Mappers;
 
-namespace Labolatorium_3.Models
+namespace Laboratorium_3.Models
 {
     public class EFBookService : IBookService
     {

@@ -1,11 +1,11 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Labolatorium_3.Models;
+using Laboratorium_3.Models;
 using System.Reflection;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Laboratorium_3.Models;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
-namespace Labolatorium_3.Controllers
+namespace Laboratorium_3.Controllers
 {
     public class BookController: Controller
     {

@@ -10,7 +10,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
 
-namespace Labolatorium_3.Areas.Identity.Pages.Account
+namespace Laboratorium_3.Areas.Identity.Pages.Account
 {
     public class LogoutModel : PageModel
     {
