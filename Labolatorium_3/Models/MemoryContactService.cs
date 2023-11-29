@@ -1,5 +1,6 @@
 ﻿using Data.Entities;
 using Laboratorium_3.Models;
+using Laboratorium_3.Models;
 using Microsoft.EntityFrameworkCore;
 //using Laboratorium_33.Models;
 using System.Reflection;
@@ -64,6 +65,11 @@ namespace Laboratorium_3.Models
                                   // Map other properties accordingly
          })
          .ToList();
+        }
+
+        public PagingList<Contact> FindPage(int page, int size)
+        {
+            throw new NotImplementedException();
         }
     }
 }

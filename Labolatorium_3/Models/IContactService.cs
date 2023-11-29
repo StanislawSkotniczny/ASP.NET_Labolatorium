@@ -1,5 +1,6 @@
 ﻿using Data.Entities;
 using Laboratorium_3.Models;
+using Laboratorium_3.Models;
 using System.Xml.Serialization;
 
 namespace Laboratorium_3.Models
@@ -17,5 +18,8 @@ namespace Laboratorium_3.Models
         void Update(Contact contact);
 
         List<OrganizationEntity> FindAllOrganizations();
+
+        PagingList<Contact> FindPage(int page, int size);
+
     }
 }
