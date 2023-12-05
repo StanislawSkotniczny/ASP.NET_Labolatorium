@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace Laboratorium_3.Controllers
 {
+    //[Authorize(Roles = "admin")]
     public class BookController: Controller
     {
         private readonly IBookService _bookService;
