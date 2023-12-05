@@ -26,6 +26,7 @@ namespace Laboratorium_3.Models
             if(find != null)
             {
                 _context.Books.Remove(find);
+                _context.SaveChanges();
             }
         }
 
@@ -47,6 +48,7 @@ namespace Laboratorium_3.Models
         public void Update(Book book)
         {
             _context.Books.Update(BookMapper.ToEntity(book));
+            _context.SaveChanges();
         }
     }
 }

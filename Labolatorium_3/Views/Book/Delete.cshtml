@@ -1,4 +1,5 @@
-﻿@model Laboratorium_3.Models.Book
+﻿
+@model Laboratorium_3.Models.Book
 @*
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
@@ -13,8 +14,8 @@
 <h3>@Model.ISBN</h3>
 <p>Wydawnictwo</p>
 <h3>@Model.Publisher</h3>
-<form asp-action="Delete">
-    <input asp-for="Id" />
+<form  asp-asp-controller="Book" asp-action="Delete" method="post" >
+    <input  type="hidden"  asp-for="Id" />
     <button class="btn btn-danger" type="submit">Tak</button>
     <a class="btn btn-info" asp-action="Index" type="submit">Anuluj</a>
 </form>

@@ -98,16 +98,11 @@ namespace Laboratorium_3.Controllers
                 .ToList();
         }
 
-        //[HttpGet]
-        //public IActionResult Details(int id)
-        //{
-        //    if (_books.ContainsKey(id))
-        //    {
-        //        var book = _books[id];
-        //        return View(book);
-        //    }
-        //    return NotFound(); // Jeśli książka o podanym ID nie istnieje
-        //}
+        [HttpGet]
+        public IActionResult Details(int id)
+        {
+            return View(_bookService.FindById(id));
+        }
 
 
 

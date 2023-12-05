@@ -37,7 +37,14 @@
         <span class="text-danger" asp-validation-for="Publisher"></span>
     </div>
     <div class="form-group">
-        <select class="form-control" asp-for="RentalId" asp-items="@Model.RentalList"></select>
+        @if (Model != null && Model.RentalList != null)
+        {
+            <select class="form-control" asp-for="RentalId" asp-items="@Model.RentalList"></select>
+        }
+        else
+        {
+            <p>Model or RentalList is null. Unable to retrieve RentalList.</p>
+        }
         <a class="btn btn-primary" asp-controller="Rental" asp-action="Create">Utworz organizacje</a>
     </div>
     <div class="mb-3">
