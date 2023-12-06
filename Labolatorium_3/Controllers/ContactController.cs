@@ -100,7 +100,9 @@ namespace Laboratorium_3.Controllers
         [HttpGet]
         public IActionResult Details(int id)
         {
-            return View(_contactService.FindById(id));
+            var model = _contactService.FindById(id);
+            
+            return model is null ? NotFound() : View();
         }
         [HttpPost]
         public IActionResult Details(Contact model)

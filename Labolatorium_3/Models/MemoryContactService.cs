@@ -11,9 +11,9 @@ namespace Laboratorium_3.Models
     {
         private Dictionary<int, Contact> _contacts = new Dictionary<int, Contact>()
         {
-            {1, new Contact() {Id = 1, Name = "Adam", Email = "adam@wsei.edu.pl", Phone = "123345667", Priority = Priority.Urgent, Created = DateTime.Now,  }}
+            //{1, new Contact() {Id = 1, Name = "Adam", Email = "adam@wsei.edu.pl", Phone = "123345667", Priority = Priority.Urgent, Created = DateTime.Now,  }} //na potrzeve testiw
         };
-        private int id = 2;
+        private int id = 1;
 
         private readonly IDateTimeProvider _timeProvider;
         public MemoryContactService(IDateTimeProvider timeProvider)
@@ -42,7 +42,8 @@ namespace Laboratorium_3.Models
 
         public Contact? FindById(int id)
         {
-            return _contacts[id];
+
+            return _contacts.ContainsKey(id) ?  _contacts[id] : null ;
         }
 
         public void Update(Contact contact)

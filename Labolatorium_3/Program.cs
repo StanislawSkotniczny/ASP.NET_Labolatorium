@@ -31,9 +31,12 @@ if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Home/Error");
 }
+
+app.UseHttpsRedirection(); //nwm czy dobtze dodalem jak nie dzia³a  cos to przez to
 app.UseStaticFiles();
 
 app.UseRouting();      ///////last lab
+app.UseMiddleware<LastVisitCookie>();
 app.UseAuthentication();;
 app.UseAuthorization();
 app.UseSession();
