@@ -70,5 +70,19 @@ namespace Laboratorium_3.Models
         .ToList();
         
         }
+
+        public PagingList<Book> FindPage(int page, int size)
+        {
+            return PagingList<Book>.Create(
+            (p, s) => _books.OrderBy(c => c.Value.Title)
+                .Skip((p - 1) * s)
+                .Take(s)
+                .Select(c => c.Value)
+            .ToList(),
+                page,
+                size,
+                _books.Count()
+            );
+        }
     }
 }

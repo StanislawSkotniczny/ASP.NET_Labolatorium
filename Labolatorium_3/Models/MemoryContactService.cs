@@ -9,10 +9,10 @@ namespace Laboratorium_3.Models
 {
     public class MemoryContactService : IContactService 
     {
-        private Dictionary<int, Contact> _contacts = new Dictionary<int, Contact>()
-        {
-            //{1, new Contact() {Id = 1, Name = "Adam", Email = "adam@wsei.edu.pl", Phone = "123345667", Priority = Priority.Urgent, Created = DateTime.Now,  }} //na potrzeve testiw
-        };
+        private Dictionary<int, Contact> _contacts = new Dictionary<int, Contact>();
+       //{
+       //     //{1, new Contact() {Id = 1, Name = "Adam", Email = "adam@wsei.edu.pl", Phone = "123345667", Priority = Priority.Urgent, Created = DateTime.Now,  }} //na potrzeve testiw
+       // }; 
         private int id = 1;
 
         private readonly IDateTimeProvider _timeProvider;
@@ -70,7 +70,16 @@ namespace Laboratorium_3.Models
 
         public PagingList<Contact> FindPage(int page, int size)
         {
-            throw new NotImplementedException();
+            return PagingList<Contact>.Create(
+            (p, s) => _contacts.OrderBy(c => c.Value.Name)
+                .Skip((p - 1) * s)
+                .Take(s)
+                .Select(c => c.Value)
+            .ToList(),
+                page,
+                size,
+                _contacts.Count()
+            );
         }
     }
 }

@@ -17,5 +17,7 @@ namespace Laboratorium_3.Models
 
         List<RentalEntity> FindAllRentalsForVieModel();
 
+        PagingList<Book> FindPage(int page, int size);
+
     }
 }

@@ -4,6 +4,7 @@ using System.Reflection;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Laboratorium_3.Models;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Laboratorium_3.Controllers
 {
@@ -21,10 +22,15 @@ namespace Laboratorium_3.Controllers
         }
 
         //static int id = 0;
-
-        public IActionResult Index()
+        [AllowAnonymous]
+        public IActionResult Index(int page = 1, int size = 5)
         {
-            return View(_bookService.FindAll());
+            if(size <1)
+            {
+                return BadRequest();
+            }
+            return View(_bookService.FindPage(page, size));
+            //return View(_bookService.FindAll());
         }
 
 
@@ -104,6 +110,26 @@ namespace Laboratorium_3.Controllers
         {
             return View(_bookService.FindById(id));
         }
+
+
+        [HttpGet]
+        public IActionResult CreateApi()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult CreateApi(Book model)
+        {
+            if (ModelState.IsValid)
+            {
+                _bookService.Add(model);
+                return RedirectToAction("Index");
+            }
+            return View();
+        }
+
+
 
 
 

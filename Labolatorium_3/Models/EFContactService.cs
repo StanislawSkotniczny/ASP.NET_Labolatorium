@@ -29,11 +29,12 @@ namespace Laboratorium_3.Models
             {
                 _context.Contacts.Remove(find);
             }
+            _context.SaveChanges();
         }
 
         public List<Contact> FindAll()
         {
-            return _context.Contacts.Select(e => ContactMapper.FromEntity(e)).ToList(); ;
+            return _context.Contacts.Select(e => ContactMapper.FromEntity(e)).ToList(); 
         }
 
         public List<OrganizationEntity> FindAllOrganizations()
@@ -65,6 +66,7 @@ namespace Laboratorium_3.Models
         public void Update(Contact contact)
         {
             _context.Contacts.Update(ContactMapper.ToEntity(contact));
+            _context.SaveChanges();
         }
 
 

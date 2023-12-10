@@ -1,0 +1,84 @@
+﻿@model Laboratorium_3.Models.Book
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+<h1>Dodaj książkę</h1>
+<form asp-controller="Book" asp-action="Create" method="post">
+    <div class="mb-3">
+        <label asp-for="Title">Tytuł</label>
+        <input class="form-control" asp-for="Title" />
+        <span class="text-danger" asp-validation-for="Title"></span>
+    </div>
+    <div class="mb-3">
+        <label asp-for="Author">Autor</label>
+        <input class="form-control" asp-for="Author" />
+        <span class="text-danger" asp-validation-for="Author"></span>
+    </div>
+    <div class="mb-3">
+        <label asp-for="PageNumber">Liczba Stron</label>
+        <input class="form-control" asp-for="PageNumber" />
+        <span class="text-danger" asp-validation-for="PageNumber"></span>
+    </div>
+    <div class="mb-3">
+        <label asp-for="ISBN">ISBN</label>
+        <input class="form-control" asp-for="ISBN" />
+        <span class="text-danger" asp-validation-for="ISBN"></span>
+    </div>
+    <div class="mb-3">
+        <label asp-for="PublicationYear">Rok wydania</label>
+        <input class="form-control" asp-for="PublicationYear" />
+        <span class="text-danger" asp-validation-for="PublicationYear"></span>
+    </div>
+    <div class="mb-3">
+        <label asp-for="Publisher">Wydawnictwo</label>
+        <input class="form-control" asp-for="Publisher" />
+        <span class="text-danger" asp-validation-for="Publisher"></span>
+    </div>
+    <div class="form-group">
+        @if (Model != null && Model.RentalList != null)
+        {
+            <select class="form-control" asp-for="RentalId" asp-items="@Model.RentalList"></select>
+        }
+        else
+        {
+            <p>Model or RentalList is null. Unable to retrieve RentalList.</p>
+        }
+        <a class="btn btn-primary" asp-controller="Rental" asp-action="Create">Utworz organizacje</a>
+    </div>
+    <div class="mb-3">
+        <button class="btn btn-primary" type="submit">Utwórz</button>
+    </div>
+</form>
+
+@section Scripts{
+    <script>
+        let select = document.getElementById("RentalId");
+        let filter = document.getElementById("filter");
+        filter.onchange = function (e) {
+            if (filter.value.lenght == 0) {
+                return;
+            }
+            fetch(`/api/rentals?q=${filter.value}`)
+                .then(response => {
+                    if (response.ok) {
+                        return response.json()
+                    }
+                    throw "no ok, status " + response.status;
+                })
+                .then(json => {
+                    select.innerHTML = "";
+                    for (let item of json) {
+                        const option = document.createElement('option');
+                        option.setAttribute('value', item.id);
+                        option.innerText = item.name;
+                        select.appendChild(option);
+                    }
+                })
+                .catch(e => {
+                    console.log('cant get data from api', e);
+                });
+        };
+    </script>
+}
