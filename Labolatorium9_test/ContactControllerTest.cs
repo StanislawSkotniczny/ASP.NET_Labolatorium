@@ -27,7 +27,7 @@ namespace Laboratorium9_test
             Assert.IsType<ViewResult>(result);
             
             var view = result as ViewResult;
-            Assert.IsType<List<Contact>>(view.Model);
+            Assert.IsType<List<Contact>>(view?.Model);
             List<Contact>? list = view.Model as List<Contact>;
             Assert.NotNull(list);
             Assert.Equal(2, list.Count);
@@ -42,7 +42,7 @@ namespace Laboratorium9_test
             Assert.IsType<ViewResult>(result);
 
             var view = result as ViewResult;
-            Assert.IsType<Contact>(view.Model);
+            Assert.IsType<Contact>(view?.Model);
             Contact? model = view.Model as Contact;
             Assert.NotNull(model);
             Assert.Equal(id, model.Id);

@@ -108,6 +108,7 @@ namespace Laboratorium_3.Controllers
         [HttpGet]
         public IActionResult Details(int id)
         {
+
             return View(_bookService.FindById(id));
         }
 
